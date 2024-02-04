@@ -199,7 +199,7 @@ async function upload(
     log(
       chalk.green(
         `A total of ${localAssets.length} assets will be added to album(s).\n` +
-          'NOTE: some assets may already be associated with the album, this will not create duplicates.',
+        'NOTE: some assets may already be associated with the album, this will not create duplicates.',
       ),
     );
   }
@@ -211,8 +211,8 @@ async function upload(
     const answer = assumeYes
       ? 'y'
       : await new Promise((resolve) => {
-          rl.question('Do you want to start upload now? (y/n) ', resolve);
-        });
+        rl.question('Do you want to start upload now? (y/n) ', resolve);
+      });
     const deleteLocalAsset = deleteAssets ? 'y' : 'n';
 
     if (answer == 'n') {
@@ -387,7 +387,7 @@ async function startUpload(endpoint: string, key: string, asset: any, deviceId: 
           contentType: 'application/xml',
         });
       }
-    } catch (e) {}
+    } catch (e) { }
 
     const config: AxiosRequestConfig<any> = {
       method: 'post',
@@ -457,7 +457,7 @@ async function addAssetsToAlbum(endpoint: string, key: string, albumId: string, 
 
 async function getAssetInfoFromServer(endpoint: string, key: string, deviceId: string) {
   try {
-    const res = await axios.get(`${endpoint}/asset/${deviceId}`, {
+    const res = await axios.get(`${endpoint}/asset/device/${deviceId}`, {
       headers: { 'x-api-key': key },
     });
     return res.data;
