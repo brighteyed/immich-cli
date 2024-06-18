@@ -392,7 +392,7 @@ async function startUpload(endpoint: string, key: string, asset: any, deviceId: 
     const config: AxiosRequestConfig<any> = {
       method: 'post',
       maxRedirects: 0,
-      url: doImport == true ? `${endpoint}/asset/import` : `${endpoint}/asset/upload`,
+      url: doImport == true ? `${endpoint}/asset/import` : `${endpoint}/assets`,
       headers: {
         'x-api-key': key,
         ...(doImport == false && formData.getHeaders()),
@@ -416,7 +416,7 @@ async function startUpload(endpoint: string, key: string, asset: any, deviceId: 
 
 async function getAlbumsFromServer(endpoint: string, key: string) {
   try {
-    const res = await axios.get(`${endpoint}/album`, {
+    const res = await axios.get(`${endpoint}/albums`, {
       headers: { 'x-api-key': key },
     });
     return res.data;
@@ -429,7 +429,7 @@ async function getAlbumsFromServer(endpoint: string, key: string) {
 async function createAlbum(endpoint: string, key: string, albumName: string) {
   try {
     const res = await axios.post(
-      `${endpoint}/album`,
+      `${endpoint}/albums`,
       { albumName },
       {
         headers: { 'x-api-key': key },
@@ -444,7 +444,7 @@ async function createAlbum(endpoint: string, key: string, albumName: string) {
 async function addAssetsToAlbum(endpoint: string, key: string, albumId: string, assetIds: string[]) {
   try {
     await axios.put(
-      `${endpoint}/album/${albumId}/assets`,
+      `${endpoint}/albums/${albumId}/assets`,
       { ids: [...new Set(assetIds)] },
       {
         headers: { 'x-api-key': key },
@@ -457,7 +457,7 @@ async function addAssetsToAlbum(endpoint: string, key: string, albumId: string, 
 
 async function getAssetInfoFromServer(endpoint: string, key: string, deviceId: string) {
   try {
-    const res = await axios.get(`${endpoint}/asset/device/${deviceId}`, {
+    const res = await axios.get(`${endpoint}/assets/device/${deviceId}`, {
       headers: { 'x-api-key': key },
     });
     return res.data;
@@ -482,7 +482,7 @@ async function pingServer(endpoint: string) {
 
 async function validateConnection(endpoint: string, key: string) {
   try {
-    const res = await axios.get(`${endpoint}/user/me`, {
+    const res = await axios.get(`${endpoint}/users/me`, {
       headers: { 'x-api-key': key },
     });
 
