@@ -470,7 +470,7 @@ async function getAssetInfoFromServer(endpoint: string, key: string, deviceId: s
 
 async function pingServer(endpoint: string) {
   try {
-    const res = await axios.get(`${endpoint}/server-info/ping`);
+    const res = await axios.get(`${endpoint}/server/ping`);
     if (res.data['res'] == 'pong') {
       log(chalk.green('Server status: OK'));
     }
@@ -498,7 +498,7 @@ async function validateConnection(endpoint: string, key: string) {
 
 async function getSupportMimeTypes(endpoint: string) {
   try {
-    const res = await axios.get(`${endpoint}/server-info/media-types`);
+    const res = await axios.get(`${endpoint}/server/media-types`);
 
     if (res.status == 200) {
       return res.data;
